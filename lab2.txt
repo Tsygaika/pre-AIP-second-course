@@ -1,0 +1,73 @@
+#include <iostream>
+#include <cmath>
+
+
+using namespace std;
+
+#define solution 3
+
+#if solution == 1
+
+int main()
+{
+    float x, y;
+    cout << "x = "; cin >> x;
+    cout << "y = "; cin >> y;
+    
+    if(pow(x, 2) + pow(y, 2) > 1){
+        cout << "Точка не принадлежит области";
+    }
+    else if(x>=0){ //4 четверть
+        if(y<=0){
+            cout << "Точка принадлежит области";
+        }
+        else{
+            cout << "Точка не принадлежит области";
+        }
+    }
+    else if(y>=-x){
+        cout << "Точка принадлежит области";
+    }
+    else{
+        cout << "Точка не принадлежит области";
+        
+    }
+    
+    
+    return 0;
+}
+
+#elif solution == 2
+
+int main()
+{
+    float x, y;
+    cout << "x = "; cin >> x;
+    cout << "y = "; cin >> y;
+    
+    if( (pow(x,2) + pow(y,2) >=1 ) && ( ((x>=0) && (y<=0)) || ((y>=-x)&&(x<=0)) ) ){
+       cout << "Точка принадлежит области"; 
+    }
+    else{cout << "Точка не принадлежит области";}
+}
+
+#elif solution == 3
+
+int func(int x, int y){
+    return ( (pow(x,2) + pow(y,2) >=1 ) && ( ((x>=0) && (y<=0)) || ((y>=-x)&&(x<=0)) ) );
+}
+
+int main()
+{   
+    float x, y;
+    cout << "x = "; cin >> x;
+    cout << "y = "; cin >> y;
+    
+    if(func(x,y)){
+       cout << "Точка принадлежит области"; 
+    }
+    else{cout << "Точка не принадлежит области"; }
+    return 0;
+}
+
+#endif
