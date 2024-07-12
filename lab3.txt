@@ -1,0 +1,64 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+int fact(int k){
+   if(k == 1){return 1;}
+   return k*fact(k-1);
+}
+
+float func(int k, float x){
+    return fact(2*k)*pow(x, k) / (2*(2*k-1)*pow(fact(k),2));
+}
+
+int main()
+{
+    float x;
+    cout << "x = "; cin >> x;
+    if(x<-0.25 || x>=0.25){cout << "х не принадлежит области определения"; return 0;}
+    
+    cout << "1) точность\n2)кол-во";
+    int choice, k;
+    cin >> choice;
+    float sum =0;
+    switch(choice){
+        case 1:
+            float target;
+            k = 2;
+            cout << "target = ";
+            cin >> target;
+            if(target<=0){cout << "Точность должна быть больше 0"; return 0;}
+            
+            while(func(k, x) > target){
+                sum = sum + func(k, x);
+                k++;
+            }
+            cout.precision(20);
+            cout << "res: " << sum << "func: " << 0.5 - x -0.5*(sqrt(1-4*x));
+        break;
+            
+        case 2:
+            int max_k;
+            
+            cout << "max_k = ";
+            cin >> max_k;
+            
+            if(max_k < 2){"max_k должен быть не меньше 2"; return 0;}
+            
+            k = 2;
+            while(k <= max_k){  //используется цикл while
+                sum += (fact(2*k)*pow(x,k))/(2*(2*k-1)*pow(fact(k),2));
+                k++;
+            }
+
+            cout.precision(20);
+            cout << "res: " << sum << " func: " << 0.5 - x -0.5*(sqrt(1-4*x));
+            break;
+        
+        default:
+            cout << "такого выбора нет";
+            break;
+    }
+
+    return 0;
+}
