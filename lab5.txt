@@ -1,0 +1,64 @@
+#include <iostream>
+
+using namespace std;
+
+#define m 3 
+#define n 2
+
+int b[m][n];
+
+void create(int b[][n]){    //создание массива
+    for(int i = 0; i < m; i++){
+        for(int j = 0; j < n; j++){
+            cout << "b[" << i << "]" << "[" << j << "] = ";
+            cin >> b[i][j];
+        }
+    }
+}
+
+void print(int b[][n]){
+    cout << "Массив:\n";
+    for(int i = 0; i < m; i++){
+        for(int j = 0; j < n; j++){
+            cout << b[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+void func(int b[][n]){  //сама функция
+    int sum = 0, min = n + 1, ind = 0, k=0;
+    
+    for(int i = 0; i < m; i++){
+        for(int j = 0; j < n; j++){
+            sum += b[i][j];
+        }
+    }
+    
+    for(int i = 0; i < m; i++){
+        for(int j = 0; j < n; j++){
+            if(b[i][j] > (float) sum/m/n){
+                k++;    //кол-во превышающих
+            }
+        }
+        if(min >= k){
+            min = k;
+            ind = i;
+        }
+    }
+    sum = 0;
+    for(int i = 0; i < n; i++){
+       sum += b[ind][i];     
+    }
+    
+    cout << "Сумма: " << sum;
+}
+
+
+int main(){
+    create(b);
+    print(b);
+    func(b);
+    
+    return 0;
+}
