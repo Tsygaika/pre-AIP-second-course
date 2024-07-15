@@ -1,0 +1,90 @@
+#include <iostream>
+
+using namespace std;
+
+
+void create(int (&b)[], int len){    // скобочки при (&b) обязательно
+    for(int i = 0; i < len; i++){
+        cout << "b["<< i << "] = ";
+        cin >> b[i];
+    }
+}
+
+
+void print(int (&b)[], int len){    // скобочки при (&b) обязательно
+    cout << "Массив: ";
+    for(int i = 0; i < len; i++){
+        cout << "b["<< i << "] = " << b[i] << endl;
+    }
+}
+
+
+void func_1(int (&b)[], int len, int x, int y){ //первое задание
+    int flag = 1, min = 2147483647;
+    
+    for(int i = 0; i < len; i++){
+        if( x<= b[i] && b[i]<=y && min > b[i]){
+            min  = b[i];
+            flag = 0;
+        }
+    }
+    
+    if(flag){cout << "Такого элемента нет" << endl; return;}
+    
+    cout << "x <= min(b[i]) <= y: " << min;
+}
+
+
+void func_2(int (&b)[], int len){ //первое задание
+    int ind_1 = -1, ind_2 = -1, min = 2147483647;
+    
+    for(int i = 0; i < len; i++){   //ищем первое четное
+        if(b[i] % 2 == 0){
+            ind_1 = i;
+            break;
+        }
+    }
+    
+    for(int i = 0; i < len; i++){   //ищем последний минимальный
+        if(min >= b[i]){
+            min  = b[i];
+            ind_2 = i;
+        }
+    }
+    
+    if(ind_1 == -1 && ind_2 == -1){
+        cout << "Не существует последнего минимального или первого нечетного" << endl;
+        return;
+    }
+    
+    int sum = 0;
+    for(int i = ind_1 + 1; i < ind_2; i++){
+        sum += b[i];
+    }
+    
+    cout << "\nСреднее арифметическое равно: " << (float) sum/(ind_2 - ind_1 - 1);
+    
+}
+
+
+int main(){
+    int len, x, y;
+    cout << "Введите длину массива: ";
+    cin >> len;
+    if(len < 1){cout << "Длина массива должна быть не меньше 1" << endl;}
+    int b[len];
+    
+    create(b, len);  //создаем массив
+    print(b, len);
+    
+    
+    cout << "x = ";
+    cin >> x;
+    cout << "y = ";
+    cin >> y;
+    
+    func_1(b, len, x, y);
+    func_2(b, len);
+    
+    return 0;
+}
